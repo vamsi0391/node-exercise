@@ -65,7 +65,7 @@ app.get('/planetresidents',function(req,res){
         var groups = _.groupBy(data, function(obj) { return obj.name })
         var results = _.map(groups, function(groups) {
         var name = groups[0].name;
-        var residents = groups[0].name
+        var residents = groups[0].residents;
             return {name: name, residents: residents }
         })
         console.log(JSON.stringify(results))
