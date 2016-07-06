@@ -1,1 +1,57 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+</head>
+<body class="container">
+
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+            
+                <div class="jumbotron">
+                  <p><%= name %></p>
+                  <p><%= height %></p>
+                  <p><%= mass %></p>
+                  <p><%= hair_color %></p>
+                  <p><%= skin_color %></p>
+                  <p><%= eye_color %></p>
+                  <p><%= birth_year %></p>
+                  <p><%= gender %></p>
+                  <p><%= homeworld %></p>
+                  <ul>
+                       <% films.forEach(function(film) { %>
+                        <li><%= film %></li>
+                      <% }); %>
+                   </ul>
+                  <ul>
+                       <% species.forEach(function(spec) { %>
+                        <li><%= spec %></li>
+                      <% }); %>
+                   </ul>
+                  <ul>
+                       <% vehicles.forEach(function(vehicle) { %>
+                        <li><%= vehicle %></li>
+                      <% }); %>
+                   </ul>
+                   <ul>
+                       <% starships.forEach(function(starship) { %>
+                        <li><%= starship %></li>
+                      <% }); %>
+                   </ul>
+                  <p><%= created %></p>
+                  <p><%= edited %></p>
+                </div>
+                
+            </div>
+            <div class="col-sm-4">
+            </div>
+        </div>
+    </main>
+
+  
+    
+</body>
+</html>
