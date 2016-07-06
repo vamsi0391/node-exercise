@@ -2,6 +2,7 @@ var express= require('express');
 var bodyParser = require('body-parser');
 var app=express();
 var request=require('request');
+_ = require("underscore");
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
@@ -31,5 +32,48 @@ app.get('/character/:name',function(req,res){
     }
 });
 })
+
+app.get('/planetresidents',function(req,res){
+  var data=[];
+   request("http://swapi.co/api/planets/", function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(body); 
+        data= body;
+        var groups = _.groupBy(data, function(obj) { return obj.name })
+        var results = _.map(groups, function(groups) {
+        var name = groups[0].name;
+        var residents = _.chain(groups).map(function(obj) { return obj.residents }).flatten().uniq().value()
+            return {name: name, residents: residents }
+        })
+        console.log(JSON.stringify(results))
+    }
+   }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
