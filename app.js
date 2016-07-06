@@ -33,6 +33,29 @@ app.get('/character/:name',function(req,res){
 });
 })
 
+app.get('/characters/:sortType', function(req,res){
+   request("http://swapi.co/api/people/?format=json", function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(body); 
+        var data=[];
+        data=body;
+        data = data.slice(0, 50);
+        if(req.params.sortType=='name'){
+          data.sort(function(a,b){
+            return a.name.localeCompare(b.name);
+          })
+        }
+        if(req.params.sortType=='mass'){
+          data.sort(function (a, b) { return parseInt(a.mass) - parseInt(b.mass) })
+        }
+        if(req.params.sortType=='height'){
+          data.sort(function (a, b) { return parseInt(a.height) - parseInt(b.height) })
+        }
+        console.log(data); 
+    }
+   }
+})
+
 app.get('/planetresidents',function(req,res){
   var data=[];
    request("http://swapi.co/api/planets/", function (error, response, body) {
@@ -42,7 +65,7 @@ app.get('/planetresidents',function(req,res){
         var groups = _.groupBy(data, function(obj) { return obj.name })
         var results = _.map(groups, function(groups) {
         var name = groups[0].name;
-        var residents = _.chain(groups).map(function(obj) { return obj.residents }).flatten().uniq().value()
+        var residents = groups[0].name
             return {name: name, residents: residents }
         })
         console.log(JSON.stringify(results))
